@@ -38,6 +38,7 @@
 		<entry key="/login" value="authc" />
 		<entry key="/logout" value="logout" />
 		<entry key="/static/**" value="anon" />
+		<entry key="/index" value="anon" />
 		<entry key="/admin/**" value="roles[admin]" />
 		<entry key="/**" value="user" />
 	</util:map>

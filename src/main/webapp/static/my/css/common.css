@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.l_err{
+    background: none repeat scroll 0 0 #FFFCC7;
+    border: 1px solid #FFC340;
+    font-size: 12px;
+    padding: 4px 8px;
+    width: 200px;
+    display: none;
+}
+.error{
+  border: 3px solid #FFCCCC;
+}
+/* .form-group{
+  padding-left: 15px
+} */
+.left{
+	text-align: left;
+	padding-left: 10px;
+}
+.right{
+	text-align: right;
+}
+.hidden-xs{
+	display: inherit;
+}
