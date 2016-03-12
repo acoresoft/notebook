@@ -56,23 +56,42 @@
 		<property name="successUrl" value="/index" />
 		<property name="unauthorizedUrl" value="/denied" />
 		<!-- 自定义权限配置 -->
-		<property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource" />
-		<property name="filters" ref="filters">
-            
-        </property>
+		<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap" />
+		<property name="filters" ref="filters"/>
 	</bean>
 	<util:map id="filters">
-        <!-- <entry key="sysUser" value-ref="sysUserFilter"/> -->
+        <entry key="sysUser" value-ref="sysUserFilter"/>
         <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
     </util:map>
+    
 	<!--自定义filterChainDefinitionMap -->
-	<bean id="chainDefinitionSectionMetaSource" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	<bean id="chainDefinitionSectionMetaSource" class="com.acoreful.notebook.commons.shiro.ChainDefinitionSectionMetaSource">
 		<property name="filterChainDefinitions">
 			<value>
-    		<!-- /static/** = anon -->
+    		/favicon.ico = anon
+    		/admin_files/** = anon
+    		/fonts/** = anon
+    		/404/** = anon
+    		/error.jsp = anon
+    		/static/** = anon
+    		/layer-v1.9.2/** = anon
+    		/notebook/** = anon
+    		/login.shtml = anon
+			/denied.jsp = anon
+			/install.shtml = anon
+			/lanyuan.shtml = anon
 			</value>
 		</property>
 	</bean>
+	<!-- Shiro的过滤器链, 过滤时会顺次执行 -->
+	<util:map id="filterChainDefinitionMap">
+		<entry key="/login" value="authc" />
+		<entry key="/logout" value="logout" />
+		<entry key="/static/**" value="anon" />
+		<entry key="/index" value="anon" />
+		<entry key="/admin/**" value="roles[admin]" />
+		<entry key="/**" value="user" />
+	</util:map>
 	
 	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 	
