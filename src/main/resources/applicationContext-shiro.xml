@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<description>Shiro安全配置</description>
+
+	<!-- Shiro的默认安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" 
+		p:realm-ref="shiroDbRealm" 
+		p:cacheManager-ref="shiroEhcacheManager" />
+
+	<!-- 项目自定义的Realm -->
+	<bean id="shiroDbRealm" class="com.acoreful.notebook.web.security.ShiroDbRealm" />
+	
+	<!-- 自定义验证拦截器 -->
+	<bean id="redirectSuccessUrlFormAuthenticationFilter" 
+		class="com.acoreful.notebook.web.security.RedirectSuccessUrlFormAuthenticationFilter" />
+
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" 
+		p:securityManager-ref="securityManager"
+		p:loginUrl="/login"
+		p:successUrl="/login/success"
+		p:filters-ref="filters"
+		p:filterChainDefinitionMap-ref="filterChainDefinitionMap" />
+		
+	<!-- 认证过滤器默认为FormAuthenticationFilter, 这里指定了自定义的FormAuthenticationFilter子类 -->
+	<util:map id="filters">
+		<entry key="authc" value-ref="redirectSuccessUrlFormAuthenticationFilter" />
+	</util:map>
+	
+	<!-- Shiro的过滤器链, 过滤时会顺次执行 -->
+	<util:map id="filterChainDefinitionMap">
+		<entry key="/login" value="authc" />
+		<entry key="/logout" value="logout" />
+		<entry key="/static/**" value="anon" />
+		<entry key="/admin/**" value="roles[admin]" />
+		<entry key="/**" value="user" />
+	</util:map>
+
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" 
+		p:cacheManagerConfigFile="classpath:ehcache-shiro.xml" />
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+</beans>
