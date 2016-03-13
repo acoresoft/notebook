@@ -60,7 +60,7 @@ var $$ctx = "${ctx}";
 			<div class="form-actions">
 				<a href="javascript:void(0);" class="flip-link btn btn-info"
 					id="to-recover">忘记密码？</a>
-				<a href="install.shtml"
+				<a href="install"
 					class="flip-link btn btn-danger" id="to-recover">一键初始化系统</a> 
 				<button type="submit" href="javascript:void(0);"
 					class="btn btn-success">登&nbsp;&nbsp;录</button>

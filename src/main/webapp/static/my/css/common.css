@@ -23,3 +23,10 @@
 .hidden-xs{
 	display: inherit;
 }
+html,body{
+	height: 100%;
+}
+#nav .footer{
+	bottom: 0px;
+	/* position: absolute; */
+}

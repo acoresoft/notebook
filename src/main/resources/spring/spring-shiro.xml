@@ -59,9 +59,9 @@
 		<property name="filters" ref="filters"/>
 	</bean>
 	<util:map id="filters">
-		<entry key="authc" value-ref="formAuthenticationFilter"/>
-        <!-- <entry key="sysUser" value-ref="sysUserFilter"/> -->
-        <!-- <entry key="kickout" value-ref="kickoutSessionControlFilter"/> -->
+		<!-- <entry key="authc" value-ref="formAuthenticationFilter"/> -->
+        <entry key="sysUser" value-ref="sysUserFilter"/>
+        <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
     </util:map>
     
 	<!--自定义filterChainDefinitionMap -->
@@ -70,7 +70,7 @@
 			<value>
     		/static/** = anon
     		/denied = anon
-    		/login = authc
+    		/login = anon
             /logout = logout
     		/** = user
 			</value>
