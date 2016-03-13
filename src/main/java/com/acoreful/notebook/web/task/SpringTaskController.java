@@ -5,11 +5,14 @@ import java.util.Properties;
 import javax.inject.Inject;
 
 import org.hyperic.sigar.Sigar;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.acoreful.notebook.commons.util.Common;
+import com.acoreful.notebook.commons.util.DateHelper;
 import com.acoreful.notebook.commons.util.EmailUtils;
 import com.acoreful.notebook.commons.util.PropertiesUtils;
 import com.acoreful.notebook.commons.util.SystemInfo;
@@ -17,12 +20,13 @@ import com.acoreful.notebook.entity.ServerInfoFormMap;
 import com.acoreful.notebook.mapper.ServerInfoMapper;
 
 /**
- * Spring调度，指定时间执行
- * 利用了spring中使用注解的方式来进行任务调度。 
+ * Spring调度，指定时间执行 利用了spring中使用注解的方式来进行任务调度。
  */
 @Component
 @Lazy(false)
 public class SpringTaskController {
+
+	private Logger logger = LoggerFactory.getLogger(SpringTaskController.class);
 	@Inject
 	private ServerInfoMapper serverInfoMapper;
 
@@ -35,6 +39,7 @@ public class SpringTaskController {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 与用户设置的使用率比较 spirng 调度
 	 * 
@@ -42,10 +47,11 @@ public class SpringTaskController {
 	 */
 	@Scheduled(cron = "1 * *  * * ? ")
 	public void task() throws Exception {
+		logger.info("{} task **************", DateHelper.date2Str(DateHelper.getNow(), DateHelper.DF_DATE));
 		ServerInfoFormMap usage = SystemInfo.usage(new Sigar());
-		String cpuUsage = usage.get("cpuUsage")+"";// CPU使用率
-		String serverUsage = usage.get("ramUsage")+"";// 系统内存使用率
-		String JvmUsage = usage.get("jvmUsage")+"";// 计算ＪＶＭ内存使用率
+		String cpuUsage = usage.get("cpuUsage") + "";// CPU使用率
+		String serverUsage = usage.get("ramUsage") + "";// 系统内存使用率
+		String JvmUsage = usage.get("jvmUsage") + "";// 计算ＪＶＭ内存使用率
 		Properties prop = PropertiesUtils.getProperties();
 		String cpu = prop.getProperty("cpu");
 		String jvm = prop.getProperty("jvm");
@@ -71,21 +77,32 @@ public class SpringTaskController {
 		mark += "</font>";
 		// 邮件内容
 
-		String title = "服务器预警提示 - "+Common.fromDateH();
-		String centent = "当前时间是：" + Common.fromDateH() + "<br/><br/>" + "<style type=\"text/css\">" + ".common-table{" + "-moz-user-select: none;" + "width:100%;" + "border:0;" + "table-layout : fixed;" + "border-top:1px solid #dedfe1;" + "border-right:1px solid #dedfe1;" + "}" +
+		String title = "服务器预警提示 - " + Common.fromDateH();
+		String centent = "当前时间是：" + Common.fromDateH() + "<br/><br/>" + "<style type=\"text/css\">" + ".common-table{"
+				+ "-moz-user-select: none;" + "width:100%;" + "border:0;" + "table-layout : fixed;"
+				+ "border-top:1px solid #dedfe1;" + "border-right:1px solid #dedfe1;" + "}" +
 
-		"/*header*/" + ".common-table thead td,.common-table thead th{" + "    height:23px;" + "   background-color:#e4e8ea;" + "   text-align:center;" + "   border-left:1px solid #dedfe1;" + "}" +
+				"/*header*/" + ".common-table thead td,.common-table thead th{" + "    height:23px;"
+				+ "   background-color:#e4e8ea;" + "   text-align:center;" + "   border-left:1px solid #dedfe1;" + "}" +
 
-		".common-table thead th, .common-table tbody th{" + "padding-left:7px;" + "padding-right:7px;" + "width:15px;" + "text-align:center;" + "}" +
+				".common-table thead th, .common-table tbody th{" + "padding-left:7px;" + "padding-right:7px;"
+				+ "width:15px;" + "text-align:center;" + "}" +
 
-		".common-table tbody td,  .common-table tbody th{" + "    height:25px!important;" + "border-bottom:1px solid #dedfe1;" + "border-left:1px solid #dedfe1;" + "cursor:default;" + "word-break: break-all;" + "-moz-outline-style: none;" + "_padding-right:7px;" + "text-align:center;" + "}</style>"
-				+ "<table class=\"common-table\">" + "<thead>" + "<tr>" + "<td width=\"100\">名称</td>" + "<td width=\"100\">参数</td>" + "<td width=\"275\">预警设置</td>" + "</tr>" + "</thead>" + "<tbody id=\"tbody\">" + "<tr " + cpubool + "><td>CPU</td><td style=\"text-align: left;\">当前使用率：" + cpuUsage
-				+ "%</td><td>使用率超出  " + cpu + "%,,发送邮箱提示 </td></tr>" + "<tr " + rambool + "><td>服务器内存</td><td style=\"text-align: left;\">当前使用率：" + serverUsage + "%</td><td>使用率超出  " + ram + "%,发送邮箱提示 </td></tr>" + "<tr " + jvmbool + "><td>JVM内存</td><td style=\"text-align: left;\">当前使用率：" + JvmUsage
-				+ "%</td><td>使用率超出  " + jvm + "%,,发送邮箱提示 </td></tr>" + "</tbody>" + "</table>";
-		mark = mark.replaceAll("'","\"");
+				".common-table tbody td,  .common-table tbody th{" + "    height:25px!important;"
+				+ "border-bottom:1px solid #dedfe1;" + "border-left:1px solid #dedfe1;" + "cursor:default;"
+				+ "word-break: break-all;" + "-moz-outline-style: none;" + "_padding-right:7px;" + "text-align:center;"
+				+ "}</style>" + "<table class=\"common-table\">" + "<thead>" + "<tr>" + "<td width=\"100\">名称</td>"
+				+ "<td width=\"100\">参数</td>" + "<td width=\"275\">预警设置</td>" + "</tr>" + "</thead>"
+				+ "<tbody id=\"tbody\">" + "<tr " + cpubool + "><td>CPU</td><td style=\"text-align: left;\">当前使用率："
+				+ cpuUsage + "%</td><td>使用率超出  " + cpu + "%,,发送邮箱提示 </td></tr>" + "<tr " + rambool
+				+ "><td>服务器内存</td><td style=\"text-align: left;\">当前使用率：" + serverUsage + "%</td><td>使用率超出  " + ram
+				+ "%,发送邮箱提示 </td></tr>" + "<tr " + jvmbool + "><td>JVM内存</td><td style=\"text-align: left;\">当前使用率："
+				+ JvmUsage + "%</td><td>使用率超出  " + jvm + "%,,发送邮箱提示 </td></tr>" + "</tbody>" + "</table>";
+		mark = mark.replaceAll("'", "\"");
 		if (!Common.isEmpty(cpubool) || !Common.isEmpty(jvmbool) || !Common.isEmpty(rambool)) {
 			try {
-				EmailUtils.sendMail(prop.getProperty("fromEmail"), email, prop.getProperty("emailName"), prop.getProperty("emailPassword"), title, centent);
+				EmailUtils.sendMail(prop.getProperty("fromEmail"), email, prop.getProperty("emailName"),
+						prop.getProperty("emailPassword"), title, centent);
 				// 保存预警信息
 				usage.put("setCpuUsage", cpu);
 				usage.put("setJvmUsage", jvm);

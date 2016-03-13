@@ -56,7 +56,7 @@
 		<property name="successUrl" value="/index" />
 		<property name="unauthorizedUrl" value="/denied" />
 		<!-- 自定义权限配置 -->
-		<property name="filterChainDefinitionMap" ref="chainDefinitionSectionMetaSource" />
+		<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap" />
 		<property name="filters" ref="filters"/>
 	</bean>
 	<util:map id="filters">
