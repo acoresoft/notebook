@@ -68,18 +68,9 @@
 	<bean id="chainDefinitionSectionMetaSource" class="com.acoreful.notebook.commons.shiro.ChainDefinitionSectionMetaSource">
 		<property name="filterChainDefinitions">
 			<value>
-    		/favicon.ico = anon
-    		/admin_files/** = anon
-    		/fonts/** = anon
-    		/404/** = anon
-    		/error.jsp = anon
     		/static/** = anon
-    		/layer-v1.9.2/** = anon
-    		/notebook/** = anon
-    		/login.shtml = anon
-			/denied.jsp = anon
-			/install.shtml = anon
-			/lanyuan.shtml = anon
+    		/login = anon
+    		/index = anon
 			</value>
 		</property>
 	</bean>
@@ -88,7 +79,7 @@
 		<entry key="/login" value="authc" />
 		<entry key="/logout" value="logout" />
 		<entry key="/static/**" value="anon" />
-		<entry key="/index" value="anon" />
+		<!-- <entry key="/index" value="anon" /> -->
 		<entry key="/admin/**" value="roles[admin]" />
 		<entry key="/**" value="user" />
 	</util:map>
@@ -130,7 +121,7 @@
 
     <!--ehcache-->
     <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:ehcache-shiro.xml"/>
+        <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
 	
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
