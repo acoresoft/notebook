@@ -11,7 +11,6 @@ import java.util.Set;
 
 import javax.xml.bind.PropertyException;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.executor.statement.BaseStatementHandler;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -75,8 +74,7 @@ public class PagePlugin implements Interceptor {
 							Map map = (Map) parameterObject;
 							if(map.containsKey("list")){
 								List<Object> lists = (List<Object>) map.get("list");
-								//TODO ?Plugin.joinSql(connection, mappedStatement, boundSql, formMap,null);
-								String sql = StringUtils.EMPTY; //Plugin.joinSql(connection, mappedStatement, boundSql, formMap,lists);
+								String sql = PluginHelper.joinSql(connection, mappedStatement, boundSql, formMap,lists);
 								ReflectHelper.setValueByFieldName(boundSql, "sql", sql);
 								return ivk.proceed();
 							} else if ("HashMap".equals(parameterObject.getClass().getSimpleName())) {
@@ -91,8 +89,7 @@ public class PagePlugin implements Interceptor {
 						}else{
 							throw new NullPointerException("调用公共方法，传入参数有错误！具体请看参数说明！");
 						}
-						//TODO ?Plugin.joinSql(connection, mappedStatement, boundSql, formMap,null);
-						String sql = StringUtils.EMPTY;//Plugin.joinSql(connection, mappedStatement, boundSql, formMap,null);
+						String sql = PluginHelper.joinSql(connection, mappedStatement, boundSql, formMap,null);
 						ReflectHelper.setValueByFieldName(boundSql, "sql", sql);
 						return ivk.proceed();
 					}

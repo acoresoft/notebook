@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.acoreful.notebook.commons.mybatis.plugins.PageView;
 import com.acoreful.notebook.commons.util.Common;
 import com.acoreful.notebook.commons.util.FormMap;
 import com.acoreful.notebook.entity.ResFormMap;
@@ -22,7 +23,7 @@ public class BaseController {
 	@Inject
 	private ResourcesMapper resourcesMapper;
 	
-	/*public PageView pageView = null;
+	public PageView pageView = null;
 	public PageView getPageView(String pageNow,String pageSize,String orderby) {
 		if (Common.isEmpty(pageNow)) {
 			pageView = new PageView(1);
@@ -35,14 +36,14 @@ public class BaseController {
 		pageView.setPageSize(Integer.parseInt(pageSize));
 		pageView.setOrderby(orderby);
 		return pageView;
-	}*/
+	}
 	
-	/*public <T> T toFormMap(T t,String pageNow,String pageSize,String orderby){
+	public <T> T toFormMap(T t,String pageNow,String pageSize,String orderby){
 		@SuppressWarnings("unchecked")
 		FormMap<String, Object> formMap = (FormMap<String, Object>) t;
 		formMap.put("paging", getPageView(pageNow, pageSize,orderby));
 		return t;
-	}*/
+	}
 	
 	/**
 	 * 获取返回某一页面的按扭组,
@@ -170,11 +171,6 @@ public class BaseController {
 	 * 通过回传Map对象.
 	 * <br/>
 	 *<b>author：</b><br/> 
-	 *<b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsplijianning</b><br/> 
-	 *<b>date：</b><br/> 
-	 *<b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2015-04-01</b><br/> 
-	 *<b>version：</b><br/> 
-	 *<b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1.0v</b>
 	 * @return Class<T>
 	 * @throws Exception
 	 */

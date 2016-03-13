@@ -33,7 +33,7 @@
 		<property name="driverClassName" value="${jdbc.driverClass}" />
 	</bean>
 	
-	<bean id="pagePlugin" class="com.github.pagehelper.PageHelper">
+	<!-- <bean id="pagePlugin" class="com.github.pagehelper.PageHelper">
 		<property name="properties">
 			 <value>
                  dialect=mysql
@@ -43,7 +43,17 @@
                  autoRuntimeDialect=true
              </value>
 		</property>
+	</bean> -->
+	
+	<bean id="pagePlugin" class="com.acoreful.notebook.commons.mybatis.plugins.PagePlugin">
+		<property name="properties">
+			<props>
+				<prop key="dialect">mysql</prop>
+				<prop key="pageSqlId">.*query.*</prop>
+			</props>
+		</property>
 	</bean>
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动匹配Mapper映射文件 -->
@@ -90,5 +100,20 @@
 		</aop:config> -->
 	<!-- 隐式地向 Spring 容器注册 -->
 	<context:annotation-config />
-
+	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	    <property name="basePackage" value="com.github.abel533.mapper,com.github.abel533.mapperhelper"/>
+	</bean>
+	
+	<bean class="com.github.abel533.mapperhelper.MapperHelper"
+        depends-on="sqlSession" init-method="initMapper" scope="singleton" lazy-init="false">
+	    <property name="mappers">
+	        <array>
+	            <value>com.github.abel533.mapper.Mapper</value>
+	        </array>
+	    </property>
+	    <property name="sqlSessions" ref="sqlSession"/>
+	</bean>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+	    <constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean> -->
 </beans>
