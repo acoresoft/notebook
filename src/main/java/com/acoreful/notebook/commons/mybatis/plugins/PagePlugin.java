@@ -32,9 +32,6 @@ import com.acoreful.notebook.commons.util.FormMap;
  * 只有在参数列表中包括Page类型的参数时才进行分页查询。 
  * 在多参数的情况下，只对第一个Page类型的参数生效。 
  * 另外，在参数列表中，Page类型的参数无需用@Param来标注 
- * @author lanyuan
- * 2015-03-20
- * @Email: mmm333zzz520@163.com
  * @version 3.0v
  */
 @SuppressWarnings("unchecked")
@@ -135,7 +132,8 @@ public class PagePlugin implements Interceptor {
      * @param page
 	 * @throws SQLException 
      */
-    private void setPageParameter(String sql, Connection connection, MappedStatement mappedStatement,
+    @SuppressWarnings("resource")
+	private void setPageParameter(String sql, Connection connection, MappedStatement mappedStatement,
             BoundSql boundSql,Object parameterObject, PageView pageView) throws SQLException {
         // 记录总记录数
     	PreparedStatement countStmt = null;
@@ -323,7 +321,6 @@ public class PagePlugin implements Interceptor {
 		return Plugin.wrap(target, this);
 	}
 
-	@SuppressWarnings("restriction")
 	public void setProperties(Properties p) {
 		dialect = p.getProperty("dialect");
 		if (isEmpty(dialect)) {
