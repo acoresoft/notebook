@@ -18,11 +18,13 @@
 <script src="${res}/js/html5shiv.js"></script>
 <script src="${res}/js/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript">
+var $$ctx = "${ctx}";
+</script>
 </head>
 <body class="login-layout light-login">
 	<div id="loginbox" style="padding-top: 10%;">
-		<form id="loginform" name="loginform" class="form-vertical"
-			action="${ctx }/login.shtml" method="post">
+		<form id="loginform" name="loginform" class="form-vertical"  method="post" action="${ctx }/login">
 			<div class="control-group normal_text">
 				<table style="width: 100%">
 					<tr>
@@ -60,13 +62,15 @@
 					id="to-recover">忘记密码？</a>
 				<a href="install.shtml"
 					class="flip-link btn btn-danger" id="to-recover">一键初始化系统</a> 
-				<a type="submit" href="javascript:checkUserForm()"
-					class="btn btn-success">登&nbsp;&nbsp;录</a>
+				<button type="submit" href="javascript:void(0);"
+					class="btn btn-success">登&nbsp;&nbsp;录</button>
 			</div>
 		</form>
 	</div>
 <!-- basic scripts -->
 <script type="text/javascript" src="${res}/js/jquery-1.x.min.js"></script>
 <script type="text/javascript" src="${res}/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="${res}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${my}/js/login.js"></script>
 </body>
 </html>

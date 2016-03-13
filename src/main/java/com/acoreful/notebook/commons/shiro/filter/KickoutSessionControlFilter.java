@@ -8,6 +8,8 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -16,12 +18,11 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * <p>User: bigbomb
- * <p>Date: 15-9-15
  * <p>Version: 1.0
  */
 public class KickoutSessionControlFilter extends AccessControlFilter {
-
+	
+	private Logger logger=LoggerFactory.getLogger(KickoutSessionControlFilter.class);
     private String kickoutUrl; //踢出后到的地址
     private boolean kickoutAfter = false; //踢出之前登录的/之后登录的用户 默认踢出之前登录的用户
     private int maxSession = 1; //同一个帐号最大会话数 默认1
@@ -65,7 +66,7 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
         Session session = subject.getSession();
         String username = (String) subject.getPrincipal();
         Serializable sessionId = session.getId();
-
+        logger.info("username:{}",username);
         //TODO 同步控制
         Deque<Serializable> deque = cache.get(username);
         if(deque == null) {
