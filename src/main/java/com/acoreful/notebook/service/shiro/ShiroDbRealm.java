@@ -28,7 +28,7 @@ import com.acoreful.notebook.mapper.UserMapper;
  * 
  * @version 3.0v
  */
-public class MyRealm extends AuthorizingRealm {
+public class ShiroDbRealm extends AuthorizingRealm {
 
 	@Inject
 	private ResourcesMapper resourcesMapper;

@@ -1,7 +1,6 @@
 $(function(){
 	$("#loginform").validate({
 		submitHandler: function(form) {
-			console.log(34);
 		    // some other code
 		    // maybe disabling submit button
 		    // then:

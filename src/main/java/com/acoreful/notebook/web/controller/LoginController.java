@@ -34,15 +34,14 @@ public class LoginController extends BaseController{
 		return "login";
 	}
 
-	@RequestMapping(value = "login1", method = RequestMethod.POST)
+	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
 	public MsgResult login(String username, String password, HttpServletRequest request) throws Exception {
 		try {
 			if (!request.getMethod().equals("POST")) {
-				request.setAttribute("error", "支持POST方法提交！");
+				return MsgResult.failure(null, "支持POST方法提交！");
 			}
 			if (Common.isEmpty(username) || Common.isEmpty(password)) {
-				request.setAttribute("error", "用户名或密码不能为空！");
 				return MsgResult.failure(null, "用户名或密码不能为空！");
 			}
 			// 想要得到 SecurityUtils.getSubject() 的对象．．访问地址必须跟ｓｈｉｒｏ的拦截地址内．不然后会报空指针
@@ -55,15 +54,12 @@ public class LoginController extends BaseController{
 				user.login(token);
 			} catch (LockedAccountException lae) {
 				token.clear();
-				request.setAttribute("error", "用户已经被锁定不能登录，请与管理员联系！");
 				return MsgResult.failure(null, "用户已经被锁定不能登录，请与管理员联系！");
 			} catch (ExcessiveAttemptsException e) {
 				token.clear();
-				request.setAttribute("error", "账号：" + username + " 登录失败次数过多,锁定10分钟!");
 				return MsgResult.failure(null, "账号：" + username + " 登录失败次数过多,锁定10分钟!");
 			} catch (AuthenticationException e) {
 				token.clear();
-				request.setAttribute("error", "用户或密码不正确！");
 				return MsgResult.failure(null, "用户或密码不正确！");
 			}
 			UserLoginFormMap userLogin = new UserLoginFormMap();
@@ -75,13 +71,12 @@ public class LoginController extends BaseController{
 			request.removeAttribute("error");
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("error", "登录异常，请联系管理员！");
 			return MsgResult.failure(null, "登录异常，请联系管理员！");
 		}
 		return MsgResult.success();
 	}
-	
-	@RequestMapping(value = "login", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
+	@Deprecated
+	@RequestMapping(value = "login1", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
 	public String login(String username, String password, HttpServletRequest request,Model model) {
 		try {
 			if (!request.getMethod().equals("POST")) {
