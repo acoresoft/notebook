@@ -99,7 +99,7 @@ $(function(){
 		});
 	var setHeight=function(){
 		//$(".app-fluid #nav > *").css("min-height",$(window).height()-50);
-		$("#nav .scrollable").height($(window).height()-90);
+		//$("#nav .scrollable").height($(window).height()-90);
 		return true;
 	};
 	setHeight();
@@ -360,7 +360,7 @@ $(function(){
 	                    '<small class="text-muted">1 minutes ago</small>'+
 	                  '</span>'+
 	                '</a>';	
-	  setTimeout(function(){addMsg($msg);}, 1500);
+	 // setTimeout(function(){addMsg($msg);}, 1500);
 
 		// select2 
 	 	if ($.fn.select2) {
