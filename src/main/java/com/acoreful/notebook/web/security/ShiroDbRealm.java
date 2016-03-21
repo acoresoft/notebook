@@ -1,5 +1,6 @@
 package com.acoreful.notebook.web.security;
 
+
 import javax.annotation.PostConstruct;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,6 +12,8 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -19,7 +22,7 @@ import org.apache.shiro.subject.PrincipalCollection;
  * @lastModified 2015-7-1 11:56:24
  */
 public class ShiroDbRealm extends AuthorizingRealm {
-
+	private Logger logger=LoggerFactory.getLogger(ShiroDbRealm.class);
 
 	/**
 	 * 认证回调函数,登录时调用.
@@ -28,6 +31,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		String username = token.getUsername();
+		logger.info("username:{}",username);
 		return null;
 	}
 

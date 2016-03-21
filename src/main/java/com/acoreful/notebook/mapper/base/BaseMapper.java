@@ -71,6 +71,7 @@ public interface BaseMapper {
 	 * 
 	 * @throws Exception
 	 */
+	@SuppressWarnings("rawtypes")
 	public void deleteByAttribute(String key, String value, Class clazz) throws Exception;
 
 	/**

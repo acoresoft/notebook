@@ -37,12 +37,14 @@ public class SpringCacheManagerWrapper implements CacheManager {
     }
 
     
-    public <K, V> Cache<K, V> getCache(String name) throws CacheException {
+    @SuppressWarnings("unchecked")
+	public <K, V> Cache<K, V> getCache(String name) throws CacheException {
         org.springframework.cache.Cache springCache = cacheManager.getCache(name);
         return new SpringCacheWrapper(springCache);
     }
 
-    static class SpringCacheWrapper implements Cache {
+    @SuppressWarnings("rawtypes")
+	static class SpringCacheWrapper implements Cache {
         private org.springframework.cache.Cache springCache;
 
         SpringCacheWrapper(org.springframework.cache.Cache springCache) {
@@ -85,7 +87,8 @@ public class SpringCacheManagerWrapper implements CacheManager {
         }
 
         
-        public Set keys() {
+        @SuppressWarnings("unchecked")
+		public Set keys() {
             if(springCache.getNativeCache() instanceof Ehcache) {
                 Ehcache ehcache = (Ehcache) springCache.getNativeCache();
                 return new HashSet(ehcache.getKeys());
@@ -94,12 +97,12 @@ public class SpringCacheManagerWrapper implements CacheManager {
         }
 
         
-        public Collection values() {
+        public Collection<Object> values() {
             if(springCache.getNativeCache() instanceof Ehcache) {
                 Ehcache ehcache = (Ehcache) springCache.getNativeCache();
                 List keys = ehcache.getKeys();
                 if (!CollectionUtils.isEmpty(keys)) {
-                    List values = new ArrayList(keys.size());
+                    List<Object> values = new ArrayList<Object>(keys.size());
                     for (Object key : keys) {
                         Object value = get(key);
                         if (value != null) {
