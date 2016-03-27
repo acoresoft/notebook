@@ -8,7 +8,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Notebook</title>
-<meta name="description" content="User login page" />
+<meta name="description" content="Admin Home page" />
+<link href="${my}/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 <!-- bootstrap & fontawesome -->
 <link href="${res_libs}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="${res_libs}/font-awesome/css/font-awesome.min.css" rel="stylesheet"  type="text/css"/>
@@ -299,6 +300,12 @@ var $$ctx = "${ctx}";
 <script type="text/javascript" src="${res}/js/jquery.slimscroll.min.js"></script>
 <script type="text/javascript" src="${res_libs}/bootstrap/js/bootstrap.min.js"></script>
 <%-- <script type="text/javascript" src="${my}/js/app.v1.js"></script> --%>
+<script type="text/javascript" src="${my}/js/common.js"></script>
 <script type="text/javascript" src="${my}/js/app.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#loadhtml").load($$ctx+"/index/main");
+	});
+</script>
 </body>
 </html>

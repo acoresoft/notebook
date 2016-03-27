@@ -52,7 +52,7 @@ public class MonitorController extends BaseController {
 		model.addAttribute("jvm", PropertiesUtils.findPropertiesKey("jvm"));
 		model.addAttribute("ram", PropertiesUtils.findPropertiesKey("ram"));
 		model.addAttribute("toEmail", PropertiesUtils.findPropertiesKey("toEmail"));
-		return Common.BACKGROUND_PATH + "/system/monitor/info";
+		return StringUtils.join("/system/monitor/info");
 	}
 	
 	@RequestMapping("monitor")

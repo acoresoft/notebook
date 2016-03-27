@@ -293,6 +293,8 @@ var Login = function() {
 $(function(){
 	$(".forget-form,.register-form").hide();
 	 Login.init();
+	 //用户名输入框默认焦点
+	 $('.login-form').find(':text[name="username"]').focus();
 	 /*$(document).on('click','button[data-close]',function(e){
 		 var $this=$(e.target);
 		 console.log($this.closest('.'+$this.data('close')));

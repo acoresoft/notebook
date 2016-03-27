@@ -36,6 +36,12 @@ import com.acoreful.notebook.mapper.ResourcesMapper;
 public class AdminController extends BaseController{
 	@Inject
 	private ResourcesMapper resourcesMapper;
+	/**
+	 * 管理首页
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping
 	public String index(Model model) throws Exception {
 		// 获取登录的bean
@@ -58,10 +64,18 @@ public class AdminController extends BaseController{
 		model.addAttribute("userFormMap", userFormMap);
 		return "index";
 	}
-	
-	@RequestMapping("menu")
-	public String menu(Model model) {
-		return "/commons/menu";
+	/**
+	 * 加载菜单页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("menuUi")
+	public String menuUi(Model model) {
+		return "/commons/menuUi";
+	}
+	@RequestMapping("main")
+	public String main(Model model) {
+		return "/admin/main";
 	}
 	/**
 	 * 获取某个用户的权限资源
@@ -75,6 +89,13 @@ public class AdminController extends BaseController{
 		return null;
 	}
 	
+	/**
+	 * 下载
+	 * @param fileName
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	@RequestMapping("download")
 	public void download(String fileName, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {

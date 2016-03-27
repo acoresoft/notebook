@@ -22,6 +22,16 @@ import com.acoreful.notebook.commons.util.Common;
 import com.acoreful.notebook.entity.UserLoginFormMap;
 import com.acoreful.notebook.mapper.UserLoginMapper;
 
+/**
+ * 登录
+ * 
+ * @author WallenHeng
+ *
+ */
+/**
+ * @author WallenHeng
+ *
+ */
 @Controller
 @RequestMapping("/")
 public class LoginController extends BaseController{
@@ -34,6 +44,14 @@ public class LoginController extends BaseController{
 		return "login";
 	}
 
+	/**
+	 * AJAX登录
+	 * @param username
+	 * @param password
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
 	public MsgResult login(String username, String password, HttpServletRequest request) throws Exception {
@@ -75,6 +93,14 @@ public class LoginController extends BaseController{
 		}
 		return MsgResult.success();
 	}
+	/**
+	 * 跳转登录
+	 * @param username
+	 * @param password
+	 * @param request
+	 * @param model
+	 * @return
+	 */
 	@Deprecated
 	@RequestMapping(value = "login1", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
 	public String login(String username, String password, HttpServletRequest request,Model model) {
@@ -121,7 +147,9 @@ public class LoginController extends BaseController{
 		}
 		return "redirect:index";
 	}
-	
+	/**
+	 * 退出登录
+	 */
 	/*@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout() {
 		// 使用权限管理工具进行用户的退出，注销登录

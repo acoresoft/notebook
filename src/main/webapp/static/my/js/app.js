@@ -1,4 +1,5 @@
 $(function(){
+	console.log(CommnUtil);
 	//触发全屏
 	/*$(document).on("click","[data-toggle=fullscreen]",function(e){
 		if(screenfull.enabled){screenfull.request()}
@@ -139,8 +140,8 @@ $(function(){
 				}
 				$("#topli").html(html);
 				var tb = $("#loadhtml");
-				//tb.html(CommnUtil.loadingImg());
-				//tb.load($$ctx+sn[2]);
+				tb.html(CommnUtil.loadingImg());
+				tb.load($$ctx+sn[2]);
 		});
 		
 		// sparkline

@@ -17,7 +17,7 @@ import com.acoreful.notebook.entity.UserFormMap;
 import com.acoreful.notebook.mapper.ResourcesMapper;
 
 /**
- * 
+ * 基础控制类
  */
 public class BaseController {
 	@Inject
