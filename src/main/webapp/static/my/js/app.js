@@ -1,5 +1,4 @@
 $(function(){
-	console.log(CommnUtil);
 	//触发全屏
 	/*$(document).on("click","[data-toggle=fullscreen]",function(e){
 		if(screenfull.enabled){screenfull.request()}
