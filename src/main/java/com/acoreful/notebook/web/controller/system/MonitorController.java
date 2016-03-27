@@ -31,9 +31,13 @@ public class MonitorController extends BaseController {
 	
 	@Inject
 	private ServerInfoMapper serverInfoMapper ;
+	/**
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("list")
 	public String listUI() throws Exception {
-		return StringUtils.join(Common.BACKGROUND_PATH,"/system/monitor/list");
+		return StringUtils.join("/system/monitor/list");
 	}
 	
 	@ResponseBody
@@ -57,13 +61,13 @@ public class MonitorController extends BaseController {
 	
 	@RequestMapping("monitor")
 	public String monitor() throws Exception {
-		return Common.BACKGROUND_PATH + "/system/monitor/monitor";
+		return "/system/monitor/monitor";
 	}
 	
 	@RequestMapping("systemInfo")
 	public String systemInfo(Model model) throws Exception {
 		model.addAttribute("systemInfo", SystemInfo.SystemProperty());
-		return Common.BACKGROUND_PATH + "/system/monitor/systemInfo";
+		return "/system/monitor/systemInfo";
 	}
 	
 	@ResponseBody

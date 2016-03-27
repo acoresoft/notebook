@@ -41,7 +41,7 @@ public class UserController extends BaseController {
 	@RequestMapping("list")
 	public String listUI(Model model) throws Exception {
 		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/user/list";
+		return "/system/user/list";
 	}
 
 	@ResponseBody
@@ -77,7 +77,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("addUI")
 	public String addUI(Model model) throws Exception {
-		return Common.BACKGROUND_PATH + "/system/user/add";
+		return "/system/user/add";
 	}
 
 	@ResponseBody
@@ -127,7 +127,7 @@ public class UserController extends BaseController {
 		if(Common.isNotEmpty(id)){
 			model.addAttribute("user", userMapper.findbyFrist("id", id, UserFormMap.class));
 		}
-		return Common.BACKGROUND_PATH + "/system/user/edit";
+		return "/system/user/edit";
 	}
 
 	@ResponseBody
@@ -171,7 +171,7 @@ public class UserController extends BaseController {
 	//密码修改
 	@RequestMapping("updatePassword")
 	public String updatePassword(Model model) throws Exception {
-		return Common.BACKGROUND_PATH + "/system/user/updatePassword";
+		return "/system/user/updatePassword";
 	}
 	
 	//保存新密码

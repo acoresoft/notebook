@@ -31,7 +31,7 @@ public class RoleController extends BaseController {
 	@RequestMapping("list")
 	public String listUI(Model model) throws Exception {
 		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/role/list";
+		return "/system/role/list";
 	}
 
 	@ResponseBody
@@ -46,7 +46,7 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("addUI")
 	public String addUI(Model model) throws Exception {
-		return Common.BACKGROUND_PATH + "/system/role/add";
+		return "/system/role/add";
 	}
 
 	@ResponseBody
@@ -77,7 +77,7 @@ public class RoleController extends BaseController {
 		if(Common.isNotEmpty(id)){
 			model.addAttribute("role", roleMapper.findbyFrist("id", id, RoleFormMap.class));
 		}
-		return Common.BACKGROUND_PATH + "/system/role/edit";
+		return "/system/role/edit";
 	}
 
 	@ResponseBody
@@ -110,7 +110,7 @@ public class RoleController extends BaseController {
 		}
 		List<RoleFormMap> roles = roleMapper.findByWhere(roleFormMap);
 		model.addAttribute("role", roles);
-		return Common.BACKGROUND_PATH + "/system/user/roleSelect";
+		return "/system/user/roleSelect";
 	}
 
 }

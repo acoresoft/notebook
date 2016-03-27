@@ -25,7 +25,7 @@ public class LogController extends BaseController {
 
 	@RequestMapping("list")
 	public String listUI(Model model) throws Exception {
-		return Common.BACKGROUND_PATH + "/system/log/list";
+		return "/system/log/list";
 	}
 
 	@ResponseBody

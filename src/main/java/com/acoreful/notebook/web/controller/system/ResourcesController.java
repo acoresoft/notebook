@@ -82,7 +82,7 @@ public class ResourcesController extends BaseController {
 	@RequestMapping("list")
 	public String list(Model model) {
 		model.addAttribute("res", findByRes());
-		return Common.BACKGROUND_PATH + "/system/resources/list";
+		return "/system/resources/list";
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class ResourcesController extends BaseController {
 		if(Common.isNotEmpty(id)){
 			model.addAttribute("resources", resourcesMapper.findbyFrist("id", id, ResFormMap.class));
 		}
-		return Common.BACKGROUND_PATH + "/system/resources/edit";
+		return "/system/resources/edit";
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class ResourcesController extends BaseController {
 	 */
 	@RequestMapping("addUI")
 	public String addUI(Model model) {
-		return Common.BACKGROUND_PATH + "/system/resources/add";
+		return "/system/resources/add";
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class ResourcesController extends BaseController {
 		TreeUtil treeUtil = new TreeUtil();
 		List<TreeObject> ns = treeUtil.getChildTreeObjects(list, 0);
 		model.addAttribute("permissions", ns);
-		return Common.BACKGROUND_PATH + "/system/resources/permissions";
+		return "/system/resources/permissions";
 	}
 
 	/**
