@@ -11,10 +11,10 @@
 		id,
 		userName,
 		accountName,
-		(select group_concat(name) from ly_role
-		where ly_role.id
-		in (SELECT roleId FROM ly_user_role WHERE
-		userId=ly_user.id) ) roleName,
+		(select group_concat(name) from sys_role
+		where sys_role.id
+		in (SELECT roleId FROM sys_user_role WHERE
+		userId=sys_user.id) ) roleName,
 		password,
 		description,
 		locked,
@@ -25,7 +25,7 @@
 	<select id="findUserPage" resultType="com.acoreful.notebook.entity.UserFormMap">
 		select
 		<include refid="selectId" />
-		from ly_user
+		from sys_user
 		where 1 = 1
 		<if test="accountName != null and accountName != ''">
 		and accountName like '%${accountName}%'

@@ -8,7 +8,7 @@ import com.acoreful.notebook.commons.util.FormMap;
 /**
  * 实体表
  */
-@TableSeg(tableName = "ly_res_user", id="userId")
+@TableSeg(tableName = "sys_res_user", id="userId")
 public class ResUserFormMap extends FormMap<String,Object>{
 
 	/**

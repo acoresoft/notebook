@@ -17,9 +17,9 @@
 	<select id="seletUserRole" resultType="com.acoreful.notebook.entity.RoleFormMap">
 	select 
 	<include refid="selectId"/>
-	 from ly_role
-		where ly_role.id
-		in (SELECT roleId FROM ly_user_role WHERE
+	 from sys_role
+		where sys_role.id
+		in (SELECT roleId FROM sys_user_role WHERE
 		userId=#{userId})
 	</select>
 </mapper>

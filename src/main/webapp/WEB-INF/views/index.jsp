@@ -171,7 +171,7 @@ var $$ctx = "${ctx}";
 						<a style="" href="javascript:void(0)" nav-n="系统基础管理,角色管理,/role/list.shtml?id=3"><span>工作面板</span></a>
 						</div>
 					</header>
-					<section class="w-f scrollable">
+					<section class="w-f">
 						<!-- sidebar-html -->
 						<!-- /sidebar-html -->
 						<div class="slim-scroll" data-height="auto"

@@ -19,7 +19,7 @@ public class PluginHelper {
 
 	public static final String FIELD = "field";
 
-	public static final String LY_TABLE = "ly_table";
+	public static final String LY_TABLE = "sys_table";
 
 	public static final String FINDBYWHERE = "findByWhere";
 
@@ -49,7 +49,7 @@ public class PluginHelper {
 		Map<String, Object> mapfield = null;
 		String field = null;
 		if (null != formMap) {
-			table = formMap.get("ly_table");
+			table = formMap.get("sys_table");
 			mapfield = (Map<String, Object>) EhcacheUtils.get(table);
 			field = mapfield.get("field").toString();
 			sql = " select " + field + " from " + String.valueOf(table);
@@ -64,7 +64,7 @@ public class PluginHelper {
 			sql = "delete from " + table.toString() + " where ";
 			String param = "";
 			for (Entry<String, Object> entry : formMap.entrySet()) {
-				if (!"ly_table".equals(entry.getKey()) && null != entry.getValue() && !"_t".equals(entry.getKey()))
+				if (!"sys_table".equals(entry.getKey()) && null != entry.getValue() && !"_t".equals(entry.getKey()))
 					param += " and " + entry.getKey() + " in (" + entry.getValue() + ")";
 			}
 			if (StringUtils.isNotBlank(param)) {
