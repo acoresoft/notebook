@@ -8,6 +8,7 @@
 <meta charset="utf-8" />
 <title>Notebook后台管理</title>
 <meta name="description" content="User login page" />
+<link href="${my}/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="${res_libs}/bootstrap/css/bootstrap.min.css" />
@@ -20,6 +21,10 @@
 <![endif]-->
 <script type="text/javascript">
 var $$ctx = "${ctx}";
+//自动跳出iframe
+if (window != top){
+	top.location.href = location.href; 
+}
 </script>
 </head>
 <body class="login">

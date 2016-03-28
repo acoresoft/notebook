@@ -30,7 +30,7 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("list")
 	public String listUI(Model model) throws Exception {
-		model.addAttribute("res", findByRes());
+		model.addAttribute("resList", findByRes());
 		return "/system/role/list";
 	}
 

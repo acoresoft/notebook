@@ -40,7 +40,7 @@ public class UserController extends BaseController {
 	
 	@RequestMapping("list")
 	public String listUI(Model model) throws Exception {
-		model.addAttribute("res", findByRes());
+		model.addAttribute("resList", findByRes());
 		return "/system/user/list";
 	}
 

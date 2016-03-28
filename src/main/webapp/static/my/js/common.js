@@ -1,3 +1,10 @@
+function onloadurl(){
+	$("[data-url]").each(function () {
+		var tb = $(this);
+		tb.html(CommnUtil.loadingImg());
+		tb.load($$ctx+tb.attr("data-url"));
+	});
+};
 ;(function() {
 	CommnUtil={
 			loadingImg :function() {

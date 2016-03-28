@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/commons/res/taglibs.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notebook</title>
+<meta name="description" content="Admin Home page" />
+<link href="${my}/img/favicon.ico" type="image/x-icon" rel="shortcut icon">
+<!-- bootstrap & fontawesome -->
+<link href="${res_libs}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="${res_libs}/font-awesome/css/font-awesome.min.css" rel="stylesheet"  type="text/css"/>
+<link href="${my}/css/layout.css" rel="stylesheet" type="text/css"/>
+<link href="${my}/css/common.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+var $$ctx = "${ctx}";
+</script>
+</head>
+<body class="app-fluid">
 <section class="vbox">
 		<div class="row"
 			style="padding-right: 8px; padding-left: 8px; padding-top: 8ps; padding-bottom: 30px;">
@@ -91,7 +110,7 @@
 						<i class="fa fa-th-list"></i> 服务器信息
 					</header>
 					<div class="panel-body" style="padding: 0px"
-						data-url="/monitor/systemInfo.shtml"></div>
+						data-url="${cxt }/monitor/systemInfo"></div>
 				</section>
 			</div>
 			<div class="col-md-6">
@@ -115,10 +134,10 @@
 					<div class="panel-body">
 						<table style="width: 100%;">
 							<tr>
-								<td width="33.3%"><div id="main_one" style="height: 240px;"></div></td>
-								<td width="33.3%"><div id="main_two" style="height: 240px;"></div></td>
+								<td width="33.3%"><div id="main_one" style="height: 280px;"></div></td>
+								<td width="33.3%"><div id="main_two" style="height: 280px;"></div></td>
 								<td width="33.3%"><div id="main_three"
-										style="height: 240px;"></div></td>
+										style="height: 280px;"></div></td>
 							</tr>
 						</table>
 					</div>
@@ -127,3 +146,31 @@
 			<!-- /.span -->
 		</div>
 	</section>
+<!-- basic scripts -->
+<script type="text/javascript" src="${res}/js/jquery-1.x.min.js"></script>
+<script type="text/javascript" src="${res}/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="${res}/js/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="${res_libs}/bootstrap/js/bootstrap.min.js"></script>
+<%-- <script type="text/javascript" src="${my}/js/app.v1.js"></script> --%>
+<script type="text/javascript" src="${res}/js/echarts.min.js"></script>
+<script type="text/javascript" src="${my}/js/common.js"></script>
+<script type="text/javascript" src="${my}/js/admin/monitor/systeminfo.js"></script>
+<script type="text/javascript">
+	function modifySer(key){
+		$.ajax({
+	        async: false,
+	        url: "${ctx}/monitor/modifySer",
+	        data:{"key":key,"value":$("#"+key).val()},
+	        dataType: "json",
+	        success: function (data) {
+	    	    if(data.flag){
+	    	    	alert("更新成功！");
+	    	    }else{
+	    	    	alert("更新失败！");
+	    	    }
+	        }
+		});
+	}
+</script>
+</body>
+</html>
